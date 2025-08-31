@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance & Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>CareerBoost</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#resume" class="nav-link">Resume Builder</a></li>
+                <li><a href="#jobs" class="nav-link">Jobs</a></li>
+                <li><a href="#guidance" class="nav-link">Career Tips</a></li>
+                <li><a href="#interview" class="nav-link">Interview Prep</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Build Your Dream Career with AI</h1>
+                <p>Get personalized career guidance, create professional resumes, and land your dream job with our AI-powered platform.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('resume')">Build Resume</button>
+                    <button class="btn-secondary" onclick="scrollToSection('jobs')">Find Jobs</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Powered</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose CareerBoost?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Smart Resume Builder</h3>
+                    <p>Create professional resumes with AI suggestions and industry-specific templates.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI Career Guidance</h3>
+                    <p>Get personalized career recommendations based on your skills and interests.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Job Matching</h3>
+                    <p>Find relevant job opportunities that match your profile and career goals.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Interview Preparation</h3>
+                    <p>Practice with AI-powered mock interviews and get instant feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Builder Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <h2>AI-Powered Resume Builder</h2>
+            <div class="resume-builder">
+                <div class="resume-form">
+                    <div class="form-tabs">
+                        <button class="tab-btn active" data-tab="personal">Personal Info</button>
+                        <button class="tab-btn" data-tab="education">Education</button>
+                        <button class="tab-btn" data-tab="experience">Experience</button>
+                        <button class="tab-btn" data-tab="skills">Skills</button>
+                    </div>
+
+                    <!-- Personal Info Tab -->
+                    <div class="tab-content active" id="personal">
+                        <h3>Personal Information</h3>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="fullName" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="phone" placeholder="+91 9876543210">
+                        </div>
+                        <div class="form-group">
+                            <label>LinkedIn Profile</label>
+                            <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                        </div>
+                        <div class="form-group">
+                            <label>Professional Summary</label>
+                            <textarea id="summary" placeholder="Brief description about yourself..."></textarea>
+                            <button class="ai-suggest-btn" onclick="generateSummary()">✨ AI Suggest</button>
+                        </div>
+                    </div>
+
+                    <!-- Education Tab -->
+                    <div class="tab-content" id="education">
+                        <h3>Education</h3>
+                        <div id="educationList"></div>
+                        <button class="add-btn" onclick="addEducation()">+ Add Education</button>
+                    </div>
+
+                    <!-- Experience Tab -->
+                    <div class="tab-content" id="experience">
+                        <h3>Work Experience</h3>
+                        <div id="experienceList"></div>
+                        <button class="add-btn" onclick="addExperience()">+ Add Experience</button>
+                    </div>
+
+                    <!-- Skills Tab -->
+                    <div class="tab-content" id="skills">
+                        <h3>Skills</h3>
+                        <div class="form-group">
+                            <label>Technical Skills</label>
+                            <input type="text" id="skillInput" placeholder="Type a skill and press Enter">
+                            <div id="skillsList" class="skills-container"></div>
+                            <button class="ai-suggest-btn" onclick="suggestSkills()">✨ AI Suggest Skills</button>
+                        </div>
+                        <div class="form-group">
+                            <label>Languages</label>
+                            <div id="languagesList" class="skills-container"></div>
+                            <input type="text" id="languageInput" placeholder="Add languages...">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-primary" onclick="generateResume()">Generate Resume</button>
+                        <button class="btn-secondary" onclick="downloadResume()">Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="resume-preview">
+                    <h3>Live Preview</h3>
+                    <div id="resumePreview" class="resume-template">
+                        <div class="resume-header">
+                            <h2 id="previewName">Your Name</h2>
+                            <div class="contact-info">
+                                <span id="previewEmail">email@example.com</span>
+                                <span id="previewPhone">+91 9876543210</span>
+                            </div>
+                        </div>
+                        <div class="resume-body">
+                            <div class="resume-section">
+                                <h3>Professional Summary</h3>
+                                <p id="previewSummary">Your professional summary will appear here...</p>
+                            </div>
+                            <div class="resume-section">
+                                <h3>Education</h3>
+                                <div id="previewEducation"></div>
+                            </div>
+                            <div class="resume-section">
+                                <h3>Experience</h3>
+                                <div id="previewExperience"></div>
+                            </div>
+                            <div class="resume-section">
+                                <h3>Skills</h3>
+                                <div id="previewSkills"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section id="jobs" class="jobs-section">
+        <div class="container">
+            <h2>Find Your Dream Job</h2>
+            <div class="job-search">
+                <div class="search-filters">
+                    <input type="text" id="jobSearch" placeholder="Search jobs, companies, or skills...">
+                    <select id="locationFilter">
+                        <option value="">All Locations</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="pune">Pune</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                    <select id="experienceFilter">
+                        <option value="">All Experience</option>
+                        <option value="fresher">Fresher</option>
+                        <option value="1-3">1-3 Years</option>
+                        <option value="3-5">3-5 Years</option>
+                        <option value="5+">5+ Years</option>
+                    </select>
+                    <button class="btn-primary" onclick="searchJobs()">Search Jobs</button>
+                </div>
+            </div>
+            <div id="jobsList" class="jobs-grid">
+                <!-- Jobs will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Guidance Section -->
+    <section id="guidance" class="guidance-section">
+        <div class="container">
+            <h2>Career Guidance & Tips</h2>
+            <div class="guidance-grid">
+                <div class="guidance-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Career Path Finder</h3>
+                    <p>Discover the best career path based on your interests and skills.</p>
+                    <button class="btn-secondary" onclick="openCareerAssessment()">Take Assessment</button>
+                </div>
+                <div class="guidance-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Skill Gap Analysis</h3>
+                    <p>Identify skills you need to develop for your target role.</p>
+                    <button class="btn-secondary" onclick="analyzeSkills()">Analyze Skills</button>
+                </div>
+                <div class="guidance-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Learning Resources</h3>
+                    <p>Get personalized course recommendations to boost your career.</p>
+                    <button class="btn-secondary" onclick="showResources()">View Resources</button>
+                </div>
+            </div>
+
+            <!-- AI Chat Assistant -->
+            <div class="ai-chat-section">
+                <h3>Ask Our AI Career Counselor</h3>
+                <div class="chat-container">
+                    <div id="chatMessages" class="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Ask about career advice, skills, or job market...">
+                        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interview Preparation Section -->
+    <section id="interview" class="interview-section">
+        <div class="container">
+            <h2>Interview Preparation</h2>
+            <div class="interview-grid">
+                <div class="interview-card">
+                    <i class="fas fa-microphone"></i>
+                    <h3>Mock Interviews</h3>
+                    <p>Practice with AI-powered mock interviews tailored to your field.</p>
+                    <button class="btn-primary" onclick="startMockInterview()">Start Practice</button>
+                </div>
+                <div class="interview-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Common Questions</h3>
+                    <p>Browse through commonly asked interview questions by category.</p>
+                    <button class="btn-secondary" onclick="showQuestions()">View Questions</button>
+                </div>
+                <div class="interview-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Video Interview Tips</h3>
+                    <p>Learn best practices for video interviews and remote hiring.</p>
+                    <button class="btn-secondary" onclick="showVideoTips()">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CareerBoost</h3>
+                    <p>Empowering students and professionals to build successful careers with AI-powered tools and guidance.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#resume">Resume Builder</a></li>
+                        <li><a href="#jobs">Job Search</a></li>
+                        <li><a href="#guidance">Career Tips</a></li>
+                        <li><a href="#interview">Interview Prep</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@careerboost.com</p>
+                    <p>Phone: +91 9876543210</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CareerBoost. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
